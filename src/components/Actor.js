@@ -3,23 +3,23 @@ import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom';
 import TimeAgo from './TimeAgo'; // Ensure the correct import path
 
-export default function Actor({ post }) {
+export default function actor({ actor }) {
   return (
-    <Stack direction="horizontal" gap={3} className="Post">
+    <Stack direction="horizontal" gap={3} className="actor">
       <Image
-        src={post.author.avatar_url + '&s=48'}
-        alt={post.author.username}
+        src={actor.author.avatar_url + '&s=48'}
+        alt={actor.author.username}
         roundedCircle
       />
       <div>
         <p>
-          <Link to={'/user/' + post.author.username}>
-            {post.author.username}
+          <Link to={'/user/' + actor.author.username}>
+            {actor.author.username}
           </Link>
           &nbsp;&mdash;&nbsp;
-          <TimeAgo isoDate={post.timestamp} />:
+          <TimeAgo isoDate={actor.timestamp} />:
         </p>
-        <p>{post.text}</p>
+        <p>{actor.text}</p>
       </div>
     </Stack>
   );

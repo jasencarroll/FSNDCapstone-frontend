@@ -1,39 +1,39 @@
 import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Post from './Actor';
+import Actor from './Actor';
 
 const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
 export default function Actors() {
-  const [posts, setPosts] = useState();
+  const [actors, setActors] = useState();
 
   useEffect(() => {
     (async () => {
-      const response = await fetch(BASE_API_URL + '/api/feed');
+      const response = await fetch(BASE_API_URL + '/actors');
       if (response.ok) {
         const results = await response.json();
-        setPosts(results.data);
+        setActors(results.data);
       }
       else {
-        setPosts(null);
+        setActors(null);
       }
     })();
   }, []);
 
   return (
     <>
-      {posts === undefined ?
+      {actors === undefined ?
         <Spinner animation="border" />
       :
         <>
-          {posts === null ?
-            <p>Could not retrieve blog posts.</p>
+          {actors === null ?
+            <p>Could not retrieve actors.</p>
           :
             <>
-              {posts.length === 0 ?
-                <p>There are no blog posts.</p>
+              {actors.length === 0 ?
+                <p>There are no actors.</p>
               :
-                posts.map(post => <Post key={post.id} post={post} />)
+                actors.map(actor => <actor key={actor.id} actor={actor} />)
               }
             </>
           }

@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom';
 import TimeAgo from './TimeAgo'; // Ensure the correct import path
 
-export default function Post({ post }) {
+export default function Movie({ post }) {
   return (
     <Stack direction="horizontal" gap={3} className="Post">
       <Image

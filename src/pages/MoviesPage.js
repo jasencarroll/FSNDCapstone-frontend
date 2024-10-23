@@ -1,5 +1,5 @@
 import Body from '../components/Body';
-import Posts from '../components/Posts';
+import Posts from '../components/Movies';
 
 export default function FeedPage() {
   return (

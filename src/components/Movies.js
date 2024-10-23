@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Post from './Post';
+import Post from './Movie';
 
 const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
-export default function Posts() {
+export default function Movies() {
   const [posts, setPosts] = useState();
 
   useEffect(() => {

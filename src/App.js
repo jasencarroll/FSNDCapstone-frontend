@@ -1,10 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
-import FeedPage from './pages/FeedPage';
-import ExplorePage from './pages/ExplorePage';
+import ActorsPage from './pages/ActorsPage';
+import MoviesPage from './pages/MoviesPage';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
+import LogoutPage from './pages/LogoutPage';
+import PrivateRoute from './components/PrivateRoute';
 
 export default function App() {
   return (
@@ -12,10 +14,11 @@ export default function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<FeedPage />} />
-          <Route path="/explore" element={<ExplorePage />} />
-          <Route path="/user/:username" element={<UserPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/actors" element={<PrivateRoute><ActorsPage /></PrivateRoute>} />
+          <Route path="/movies" element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
+          <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} />
+          <Route path="/user/:username" element={<PrivateRoute><UserPage /></PrivateRoute>} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

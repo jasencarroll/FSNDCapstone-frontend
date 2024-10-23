@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <Navbar bg="light" sticky="top" className="Header">
       <Container>
-        <Navbar.Brand>Microblog</Navbar.Brand>
+        <Navbar.Brand>Casting Agency</Navbar.Brand>
       </Container>
     </Navbar>
   );

@@ -1,39 +1,39 @@
 import { useState, useEffect } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Post from './Movie';
+import Movie from './Movie';
 
 const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 
 export default function Movies() {
-  const [posts, setPosts] = useState();
+  const [movies, setMovies] = useState();
 
   useEffect(() => {
     (async () => {
       const response = await fetch(BASE_API_URL + '/api/feed');
       if (response.ok) {
         const results = await response.json();
-        setPosts(results.data);
+        setMovies(results.data);
       }
       else {
-        setPosts(null);
+        setMovies(null);
       }
     })();
   }, []);
 
   return (
     <>
-      {posts === undefined ?
+      {movies === undefined ?
         <Spinner animation="border" />
       :
         <>
-          {posts === null ?
-            <p>Could not retrieve blog posts.</p>
+          {movies === null ?
+            <p>Could not retrieve blog movies.</p>
           :
             <>
-              {posts.length === 0 ?
-                <p>There are no blog posts.</p>
+              {movies.length === 0 ?
+                <p>There are no blog movies.</p>
               :
-                posts.map(post => <Post key={post.id} post={post} />)
+                movies.map(post => <Movie key={post.id} post={post} />)
               }
             </>
           }

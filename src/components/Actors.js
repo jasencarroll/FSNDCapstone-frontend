@@ -33,7 +33,7 @@ export default function Actors() {
               {actors.length === 0 ?
                 <p>There are no actors.</p>
               :
-                actors.map(actor => <actor key={actor.id} actor={actor} />)
+                actors.map(actor => <Actor key={actor.id} actor={actor} />)
               }
             </>
           }

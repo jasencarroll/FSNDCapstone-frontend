@@ -1,10 +1,10 @@
 import Body from '../components/Body';
-import Posts from '../components/Actors';
+import Actors from '../components/Actors';
 
 export default function FeedPage() {
   return (
     <Body sidebar>
-      <Posts />
+      <Actors />
     </Body>
   );
 }

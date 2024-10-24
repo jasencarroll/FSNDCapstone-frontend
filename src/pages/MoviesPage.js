@@ -1,10 +1,10 @@
 import Body from '../components/Body';
-import Posts from '../components/Movies';
+import Movies from '../components/Movies';
 
 export default function FeedPage() {
   return (
     <Body sidebar>
-      <Posts />
+      <Movies />
     </Body>
   );
 }

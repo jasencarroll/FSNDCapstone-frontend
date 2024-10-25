@@ -13,7 +13,9 @@ root.render(
       domain="dev-8his2amisscpohz8.us.auth0.com"
       clientId="yYFp0APB3UcOth6FvnVprXVAqnSz57Ld"
       authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: window.location.origin,
+        audience: 'https://jcsFSNDCapstone510699.com',
+        scope: "all:permissions"
       }}
     >
       <App />

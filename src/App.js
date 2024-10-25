@@ -17,7 +17,7 @@ export default function App() {
           <Route path="/actors" element={<PrivateRoute><ActorsPage /></PrivateRoute>} />
           <Route path="/movies" element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
           <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} />
-          <Route path="/user/:username" element={<PrivateRoute><UserPage /></PrivateRoute>} />
+          <Route path="/movie/:username" element={<PrivateRoute><UserPage /></PrivateRoute>} />
           <Route path="/" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

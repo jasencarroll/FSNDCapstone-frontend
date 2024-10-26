@@ -6,10 +6,9 @@ export default function Movie({ movie }) {
   return (
     <Stack direction="horizontal" gap={3} className="Movie">
       <div class="Content">
-        <Link to={'/movie/' + movie.id}>
+        <Link to={'/movies/' + movie.id}>
           {movie.title}
         </Link>
-        &nbsp;&mdash;&nbsp;
         <p>{movie.release_date}</p>
       </div>
     </Stack>

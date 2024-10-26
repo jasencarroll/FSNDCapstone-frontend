@@ -14,6 +14,16 @@ export default function MoviePage() {
   const { getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();  // Initialize useNavigate for programmatic navigation
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',  // "Wed"
+      year: 'numeric',   // "2020"
+      month: 'short',    // "Jul"
+      day: 'numeric'     // "15"
+    });
+  };
+
   useEffect(() => {
     const fetchMovie = async () => {
       try {
@@ -105,7 +115,7 @@ export default function MoviePage() {
   return (
     <Body sidebar>
       <h1>{movieData.title || 'No Title Available'}</h1>
-      <p>Release Date: {movieData.release_date || 'Unknown'}</p>
+      <p>Release Date: {formatDate(movieData.release_date) || 'Unknown'}</p>
       <p>{movieData.description || 'No description available.'}</p>
       <button 
         type="button" 

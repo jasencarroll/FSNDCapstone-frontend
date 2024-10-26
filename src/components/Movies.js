@@ -19,6 +19,16 @@ export default function Movies() {
     navigate('/movies/new');  // This path should match your route for adding movies
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      weekday: 'short',  // "Wed"
+      year: 'numeric',   // "2020"
+      month: 'short',    // "Jul"
+      day: 'numeric'     // "15"
+    });
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -54,10 +64,17 @@ export default function Movies() {
 
   return (
     <>
-      <br></br>
-      <button display="block" type="button" class="button btn btn-success" onClick={handleAddMovieClick}>Add Movie</button>
+      <br />
+      <button 
+        type="button" 
+        className="button btn btn-success"  // Updated `class` to `className`
+        onClick={handleAddMovieClick}
+      >
+        Add Movie
+      </button>
+
       <div>
-        <br></br>
+        <br />
         {/* Loading spinner */}
         {movies === null && !error && <Spinner animation="border" />}
 
@@ -66,7 +83,13 @@ export default function Movies() {
 
         {/* Movies data */}
         {movies && movies.length > 0 && movies.map((movie) => (
-          <Movie key={movie.id} movie={movie} />
+          <Movie 
+            key={movie.id} 
+            movie={{ 
+              ...movie, 
+              release_date: formatDate(movie.release_date)  // Format the release date here
+            }} 
+          />
         ))}
 
         {/* Messages for no data */}

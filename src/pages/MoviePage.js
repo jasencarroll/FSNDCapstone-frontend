@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Body from '../components/Body';
 
@@ -7,11 +7,12 @@ const BASE_API_URL = process.env.REACT_APP_BASE_API_URL;
 const YOUR_API_IDENTIFIER = process.env.REACT_APP_AUDIENCE;
 
 export default function MoviePage() {
-  const { id } = useParams();  // Use id from the URL parameters
+  const { id } = useParams();  // Get the movie ID from the URL parameters
   const [movieData, setMovieData] = useState(null);  // Movie data state
   const [loading, setLoading] = useState(true);  // Loading state
   const [error, setError] = useState(null);  // Error state
   const { getAccessTokenSilently } = useAuth0();
+  const navigate = useNavigate();  // Initialize useNavigate for programmatic navigation
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -48,6 +49,46 @@ export default function MoviePage() {
     fetchMovie();
   }, [getAccessTokenSilently, id]);
 
+  // Function to handle the Edit button click
+  const handleEditMovieClick = () => {
+    navigate(`/movies/${id}/edit`);  // Programmatically navigate to the edit page
+  };
+
+  // Function to handle the Delete button click
+  const handleDeleteMovieClick = async () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this movie?');
+
+    if (!confirmDelete) {
+      return;  // If the user cancels, do nothing
+    }
+
+    try {
+      const token = await getAccessTokenSilently({
+        audience: YOUR_API_IDENTIFIER,
+        scope: 'delete:movies'  // Ensure this matches your API's scope for deletion
+      });
+
+      const response = await fetch(`${BASE_API_URL}/movies/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`  // Pass the token in the Authorization header
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      // After successful deletion, navigate back to the movies list
+      alert('Movie deleted successfully');
+      navigate('/movies');
+
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+      alert('Failed to delete the movie. Please try again.');
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -64,11 +105,22 @@ export default function MoviePage() {
   return (
     <Body sidebar>
       <h1>{movieData.title || 'No Title Available'}</h1>
-      <p>{movieData.description || 'No description available.'}</p>
-      <p>Directed by: {movieData.director || 'Unknown'}</p>
       <p>Release Date: {movieData.release_date || 'Unknown'}</p>
-      <button type="button" className="btn btn-warning button_left">Edit</button>
-      <button type="button" className="btn btn-danger  button_left">Delete</button>
+      <p>{movieData.description || 'No description available.'}</p>
+      <button 
+        type="button" 
+        className="btn btn-warning button_left"
+        onClick={handleEditMovieClick}  // Trigger navigation to edit page
+      >
+        Edit
+      </button>
+      <button 
+        type="button" 
+        className="btn btn-danger button_left"
+        onClick={handleDeleteMovieClick}  // Trigger delete confirmation and deletion
+      >
+        Delete
+      </button>
     </Body>
   );
 }

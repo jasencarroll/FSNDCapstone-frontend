@@ -10,6 +10,8 @@ import LogoutPage from './pages/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
 import NewMoviePage from './pages/NewMoviePage';
 import NewActorPage from './pages/NewActorPage';
+import EditMoviePage from './pages/EditMoviePage';
+import EditActorPage from './pages/EditActorPage';
 
 export default function App() {
   return (
@@ -24,6 +26,8 @@ export default function App() {
           <Route path="/actors/:id" element={<PrivateRoute><ActorPage /></PrivateRoute>} />
           <Route path="/movies/new" element={<PrivateRoute><NewMoviePage /></PrivateRoute>} />
           <Route path="/actors/new" element={<PrivateRoute><NewActorPage /></PrivateRoute>} />
+          <Route path="/movies/:id/edit" element={<PrivateRoute><EditMoviePage /></PrivateRoute>} />
+          <Route path="/actors/:id/edit" element={<PrivateRoute><EditActorPage /></PrivateRoute>} />
           <Route path="/" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

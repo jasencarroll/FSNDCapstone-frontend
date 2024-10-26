@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Body from '../components/Body';
 
@@ -12,6 +12,47 @@ export default function ActorPage() {
   const [loading, setLoading] = useState(true);  // Loading state
   const [error, setError] = useState(null);  // Error state
   const { getAccessTokenSilently } = useAuth0();
+  const navigate = useNavigate();  // Initialize useNavigate
+
+  // Function to handle Edit button click
+  const handleEditActorClick = () => {
+    navigate(`/actors/${id}/edit`);  // Navigate to the actor edit page using actor ID
+  };
+
+  // Function to handle Delete button click
+  const handleDeleteActorClick = async () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this actor?');
+
+    if (!confirmDelete) {
+      return;  // If the user cancels, do nothing
+    }
+
+    try {
+      const token = await getAccessTokenSilently({
+        audience: YOUR_API_IDENTIFIER,
+        scope: 'delete:actors'  // Ensure this matches your API's scope for deletion
+      });
+
+      const response = await fetch(`${BASE_API_URL}/actors/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`  // Pass the token in the Authorization header
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+
+      // After successful deletion, navigate back to the actors list
+      alert('Actor deleted successfully');
+      navigate('/actors');
+
+    } catch (error) {
+      console.error('Error deleting actor:', error);
+      alert('Failed to delete the actor. Please try again.');
+    }
+  };
 
   useEffect(() => {
     const fetchActor = async () => {
@@ -66,8 +107,20 @@ export default function ActorPage() {
       <h2>{actorData.name || 'No Name Available'}</h2>
       <p>Age: {actorData.age || 'Unknown'}</p>
       <p>Gender: {actorData.gender || 'Unknown'}</p>
-      <button type="button" className="btn btn-warning button_left">Edit</button>
-      <button type="button" className="btn btn-danger button_left">Delete</button>
+      <button 
+        type="button" 
+        className="btn btn-warning button_left" 
+        onClick={handleEditActorClick}  // Edit handler
+      >
+        Edit
+      </button>
+      <button 
+        type="button" 
+        className="btn btn-danger button_left" 
+        onClick={handleDeleteActorClick}  // Delete handler
+      >
+        Delete
+      </button>
     </Body>
   );
 }

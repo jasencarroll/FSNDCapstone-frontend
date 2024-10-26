@@ -46,19 +46,24 @@ export default function Actors() {
 
   return (
     <>
-      {/* Loading spinner */}
-      {actors === null && !error && <Spinner animation="border" />}
+      <br></br>
+      <button display="block" type="button" class="button btn btn-success">Add Movie</button>
+      <div>
+        <br></br>
+        {/* Loading spinner */}
+        {actors === null && !error && <Spinner animation="border" />}
 
-      {/* Error message */}
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+        {/* Error message */}
+        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
-      {/* Movies data */}
-      {actors && actors.length > 0 && actors.map((actor) => (
-        <Actor key={actor.id} actor={actor} />
-      ))}
+        {/* Movies data */}
+        {actors && actors.length > 0 && actors.map((actor) => (
+          <Actor key={actor.id} actor={actor} />
+        ))}
 
-      {/* Messages for no data */}
-      {actors && actors.length === 0 && <p>There are no actors available.</p>}
+        {/* Messages for no data */}
+        {actors && actors.length === 0 && <p>There are no actors available.</p>}
+      </div>
     </>
   );
 }

@@ -46,19 +46,24 @@ export default function Movies() {
 
   return (
     <>
-      {/* Loading spinner */}
-      {movies === null && !error && <Spinner animation="border" />}
+      <br></br>
+      <button display="block" type="button" class="button btn btn-success">Add Movie</button>
+      <div>
+        <br></br>
+        {/* Loading spinner */}
+        {movies === null && !error && <Spinner animation="border" />}
 
-      {/* Error message */}
-      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+        {/* Error message */}
+        {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
-      {/* Movies data */}
-      {movies && movies.length > 0 && movies.map((movie) => (
-        <Movie key={movie.id} movie={movie} />
-      ))}
+        {/* Movies data */}
+        {movies && movies.length > 0 && movies.map((movie) => (
+          <Movie key={movie.id} movie={movie} />
+        ))}
 
-      {/* Messages for no data */}
-      {movies && movies.length === 0 && <p>There are no movies available.</p>}
+        {/* Messages for no data */}
+        {movies && movies.length === 0 && <p>There are no movies available.</p>}
+      </div>
     </>
   );
 }

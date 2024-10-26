@@ -64,9 +64,8 @@ export default function ActorPage() {
   return (
     <Body sidebar>
       <h2>{actorData.name || 'No Name Available'}</h2>
-      <p>{actorData.bio || 'No biography available.'}</p>
-      <p>Date of Birth: {actorData.dob || 'Unknown'}</p>
-      <p>Number of Movies: {actorData.movie_count || 'Unknown'}</p>
+      <p>Age: {actorData.age || 'Unknown'}</p>
+      <p>Gender: {actorData.gender || 'Unknown'}</p>
       <button type="button" className="btn btn-warning button_left">Edit</button>
       <button type="button" className="btn btn-danger button_left">Delete</button>
     </Body>

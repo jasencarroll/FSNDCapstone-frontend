@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate for routing
 import Spinner from 'react-bootstrap/Spinner';
 import Movie from './Movie';
 
@@ -10,6 +11,13 @@ export default function Movies() {
   const { getAccessTokenSilently } = useAuth0();
   const [movies, setMovies] = useState(null); // Initialize with null for loading state
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();  // Initialize useNavigate hook
+
+  // This function will handle the button click and navigate to the AddMovieForm
+  const handleAddMovieClick = () => {
+    navigate('/movies/new');  // This path should match your route for adding movies
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -47,7 +55,7 @@ export default function Movies() {
   return (
     <>
       <br></br>
-      <button display="block" type="button" class="button btn btn-success">Add Movie</button>
+      <button display="block" type="button" class="button btn btn-success" onClick={handleAddMovieClick}>Add Movie</button>
       <div>
         <br></br>
         {/* Loading spinner */}

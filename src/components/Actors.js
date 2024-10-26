@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate for navigation
 import { useAuth0 } from '@auth0/auth0-react';
 import Spinner from 'react-bootstrap/Spinner';
 import Actor from './Actor';
@@ -10,6 +11,12 @@ export default function Actors() {
   const { getAccessTokenSilently } = useAuth0();
   const [actors, setActors] = useState(null); // Initialize with null for loading state
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();  // Initialize useNavigate hook
+
+  const handleAddActorClick = () => {
+    navigate('/actors/new');  // Navigate to the new actor form route
+  };
 
   useEffect(() => {
     const fetchActors = async () => {
@@ -47,7 +54,7 @@ export default function Actors() {
   return (
     <>
       <br></br>
-      <button display="block" type="button" class="button btn btn-success">Add Movie</button>
+      <button display="block" type="button" class="button btn btn-success" onClick={handleAddActorClick}>Add Actor</button>
       <div>
         <br></br>
         {/* Loading spinner */}

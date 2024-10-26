@@ -8,6 +8,8 @@ export default function UserPage() {
     <Body sidebar>
       <h1>{username}</h1>
       <p>TODO</p>
+      <button type="button" class="btn btn-warning">Edit</button>
+      <button type="button" class="btn btn-danger">Delete</button>
     </Body>
   );
 }

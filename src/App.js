@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import ActorsPage from './pages/ActorsPage';
 import MoviesPage from './pages/MoviesPage';
-import UserPage from './pages/UserPage';
+import MoviePage from './pages/MoviePage';
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
 import PrivateRoute from './components/PrivateRoute';
@@ -17,7 +17,7 @@ export default function App() {
           <Route path="/actors" element={<PrivateRoute><ActorsPage /></PrivateRoute>} />
           <Route path="/movies" element={<PrivateRoute><MoviesPage /></PrivateRoute>} />
           <Route path="/logout" element={<PrivateRoute><LogoutPage /></PrivateRoute>} />
-          <Route path="/movie/:username" element={<PrivateRoute><UserPage /></PrivateRoute>} />
+          <Route path="/movie/:id" element={<PrivateRoute><MoviePage /></PrivateRoute>} />
           <Route path="/" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

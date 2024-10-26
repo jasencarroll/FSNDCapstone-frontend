@@ -94,3 +94,11 @@ code {
 .Post a:visited {
   color: #14c;
 }
+
+.button_right {
+  margin-left: 10px;
+}
+
+.button_left {
+  margin-right: 10px;
+}

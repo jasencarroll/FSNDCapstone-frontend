@@ -1,6 +1,5 @@
 import Stack from 'react-bootstrap/Stack';
 import { Link } from 'react-router-dom';
-import TimeAgo from './TimeAgo'; // Ensure the correct import path
 
 export default function Actor({ actor }) {  // Updated component name to follow React conventions
   return (
